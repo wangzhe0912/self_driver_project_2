@@ -1,6 +1,7 @@
 from camera import Camera
 import cv2
 import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 
 
 if __name__ == "__main__":
@@ -11,7 +12,7 @@ if __name__ == "__main__":
     camera.load_picures(pictures_list)
 
     test_picture = "../test_images/straight_lines1.jpg"
-    img = cv2.imread(test_picture)
+    img = mpimg.imread(test_picture)
     result = camera.cal_undistort(img)
     f, (ax1, ax2) = plt.subplots(1, 2, figsize=(24, 9))
     f.tight_layout()

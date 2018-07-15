@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 
 
 class Camera(object):
@@ -41,9 +42,9 @@ class Camera(object):
         imgpoints = []
         for filename in images:
             # get an image
-            img = cv2.imread(filename)
+            img = mpimg.imread(filename)
             # transform to gray image
-            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
             # find the image color
             ret, corners = cv2.findChessboardCorners(gray, (self.nx, self.ny), None)
             if ret:
@@ -61,7 +62,7 @@ class Camera(object):
         """
         if self.objpoints is None or self.imgpoints is None:
             raise Exception("this camera is not to adjust, so cannot use to cal_undistort image")
-        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
         ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(
             self.objpoints, self.imgpoints, gray.shape[::-1], None, None
         )
@@ -76,7 +77,7 @@ if __name__ == "__main__":
     pictures_list = ["../camera_cal/" + filename for filename in pictures_file_names]
     # pictures_list = ["../camera_cal/calibration2.jpg"]
     camera.load_picures(pictures_list)
-    img = cv2.imread(pictures_list[0])
+    img = mpimg.imread(pictures_list[0])
     result = camera.cal_undistort(img)
     f, (ax1, ax2) = plt.subplots(1, 2, figsize=(24, 9))
     f.tight_layout()
