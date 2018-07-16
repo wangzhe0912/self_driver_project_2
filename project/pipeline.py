@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 from thresholding_filter import final_thresholding_filter
 from perspective_transform import get_transform_m, perspective_transform, reverse_picture
-from histogram import get_polynomial_fitting_curve
+from fitting_curve import get_polynomial_fitting_curve
 
 
 if __name__ == "__main__":

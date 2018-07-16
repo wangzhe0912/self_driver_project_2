@@ -1,4 +1,5 @@
-# Assume you now have a new warped binary image
+
+##  Assume you now have a new warped binary image
 # from the next frame of video (also called "binary_warped")
 # It's now much easier to find line pixels!
 nonzero = binary_warped.nonzero()
