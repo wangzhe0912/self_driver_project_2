@@ -34,7 +34,6 @@ if __name__ == "__main__":
     left_fit, right_fit, left_curverad, bias_meter = get_polynomial_fitting_curve(perspective_filter_img)
     # left_curverad 曲率
     # bias_meter中心偏移量
-
     newwarp = reverse_picture(perspective_filter_img, left_fit, right_fit, Minv)
     # Combine the result with the original image
     result = cv2.addWeighted(undistort_img, 1, newwarp, 0.3, 0)
