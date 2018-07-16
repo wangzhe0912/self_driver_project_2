@@ -120,11 +120,12 @@ def get_polynomial_fitting_curve(binary_warped):
     return left_fit, right_fit, left_curverad, bias_meter
 
 
-def get_polynomial_fitting_curve_again(binary_warped, left_fit, right_fit):
+def get_polynomial_fitting_curve_again(binary_warped, left_fit, right_fit, iframe):
     """
     :param binary_warped: input is the filter_img after perspective transform
     :param left_fit: 上一帧中左测车道线
     :param right_fit: 上一帧中右侧车道线
+    :param iframe: 当前第几帧
     # 根据上一条曲线的可能区域中直接筛选，而不再使用滑动滤波器
     :return:
     """
@@ -169,6 +170,9 @@ def get_polynomial_fitting_curve_again(binary_warped, left_fit, right_fit):
     image_center = binary_warped.shape[1] / 2
     bias_meter = (car_center - image_center) * xm_per_pix
 
-    confident = True
+    if iframe % 10 == 0:
+        confident = False
+    else:
+        confident = True
 
     return confident, left_fit, right_fit, left_curverad, bias_meter
